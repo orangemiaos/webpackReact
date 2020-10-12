@@ -1,0 +1,16 @@
+{
+  "name": "webpackD",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/zhangmeng18/webpackD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
