@@ -1,0 +1,5 @@
+.hello{
+    color:red;
+    /* webpack 在 src 文件夹中找到jpg文件，并成功处理了它，所以审查元素的时候看到的图片名是一个hash值 */
+    background:url(../image/pig.jpg);
+}
