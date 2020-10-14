@@ -1,7 +1,9 @@
 const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     entry: {
         app: './src/index.js',
         print: './src/print.js'
@@ -9,6 +11,12 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
+    },
+    // 打包源代码的时候，追踪代码位置，从打包文件追踪到源文件中
+    devtool: 'inline-source-map',
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        port: 9000
     },
     module: {
         rules: [
@@ -21,5 +29,14 @@ module.exports = {
             // 处理xml
             { test: /\.xml$/, use: ['xml-loader'] }
         ]
-    }
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        // html-webpack-plugin 会在dist目录中重新生成一个index.html文件
+        // 这个文件的bundle会自动添加到html中，来解决生成包重命名问题
+        new HTMLWebpackPlugin({
+            title: 'Output Management',
+            filename: 'index.html'
+        })
+    ]
 };
