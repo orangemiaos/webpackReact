@@ -13,7 +13,7 @@ let component = function () {
     element.classList.add('hello');
 
     let btn = document.createElement('button');
-    btn.innerHTML = '点击这里，然后查看 console！';
+    btn.innerHTML = 'btn';
     btn.onclick = printMe;
     element.appendChild(btn);
     // let icon = new Image;
