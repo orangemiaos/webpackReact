@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{5:function(o,n,c){"use strict";c.r(n),console.log("引入print"),n.default=()=>{console.log("Button Clicked")}}}]);
