@@ -38,7 +38,7 @@ module.exports = {
                     }
                 },
                 exclude: /(node_modules|bower_components)/,
-            }, 
+            },
         ],
     },
     plugins: [
@@ -47,8 +47,9 @@ module.exports = {
         // html-webpack-plugin 会在dist目录中重新生成一个index.html文件
         // 这个文件的bundle会自动添加到html中，来解决生成包重命名问题
         new HTMLWebpackPlugin({
-            title: 'code split',
-            filename: 'index.html'
+            title: 'webpack title', // 页面标题
+            filename: 'index.html', // 生成页面的名字
+            template: 'public/index.html' // 结合public/index.html 生成模版
         })
     ],
     optimization: {

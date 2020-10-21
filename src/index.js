@@ -11,11 +11,4 @@ if (process.env.NODE_ENV == 'production') {
     console.log('Looks like we are in development mode');
 }
 
-let element = document.createElement('div');
-element.id  = 'root';
-document.body.append(element);
-
-ReactDom.render(
-    <App/>,
-    document.getElementById('root')
-)
+ReactDom.render(<App/>,document.getElementById("root"));
