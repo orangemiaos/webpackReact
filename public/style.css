@@ -1,5 +1,5 @@
-.hello{
+div{
     color:blue;
     /* webpack 在 src 文件夹中找到jpg文件，将图片转为base64 */
-    background:url(../image/pig.jpg);
+    /* background:url(../image/pig.jpg); */
 }

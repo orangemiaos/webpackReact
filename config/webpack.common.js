@@ -27,8 +27,19 @@ module.exports = {
             // 处理字体
             { test: /\.(woff|woff2|eot|ttf|otf)$/, use: ['file-loader'] },
             // 处理xml
-            { test: /\.xml$/, use: ['xml-loader'] }
-        ]
+            { test: /\.xml$/, use: ['xml-loader'] },
+            // 处理jsx
+            {
+                test: /\.m?js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                },
+                exclude: /(node_modules|bower_components)/,
+            }, 
+        ],
     },
     plugins: [
         // 每次构建前清理 /dist 文件夹

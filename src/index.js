@@ -1,27 +1,21 @@
-// import _ from 'lodash';
+import React from 'react';
+import ReactDom from 'react-dom';
+import App from './App';
 // 需要配置loader才可以导入css后缀名的文件
-// import './style.css';
-// import myPic from '../image/pig.jpg';
-// import Data from './data.xml';
-// import  './print.js';
+import '../public/style.css';
 
-
-if (process.env.NODE_ENV !== 'production') {
+// webpack自动设置环境变量，development，production
+if (process.env.NODE_ENV == 'production') {
+    console.log('Looks like we are in production mode');
+} else if (process.env.NODE_ENV == 'development') {
     console.log('Looks like we are in development mode');
 }
 
-let component = function () {
-    let element = document.createElement('input');
-    element.type = 'button';
-    element.value = '点击我哈哈哈哈';
-    // 懒加载引入
-    element.onclick = e => import('./print').then(module => {
-        let print = module.default;
-        print();
-    });
-    return element;
-}
+let element = document.createElement('div');
+element.id  = 'root';
+document.body.append(element);
 
-
-
-document.body.appendChild(component());
+ReactDom.render(
+    <App/>,
+    document.getElementById('root')
+)
