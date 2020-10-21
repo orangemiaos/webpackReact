@@ -22,6 +22,8 @@ module.exports = {
         rules: [
             // 处理css文件
             { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+            // 处理less文件
+            { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
             // 处理图片
             { test: /\.(png|svg|jpg|gif)$/, use: ['file-loader'] },
             // 处理字体

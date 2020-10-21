@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './App';
+
 // 需要配置loader才可以导入css后缀名的文件
-import '../public/style.css';
+import '../public/index.less';
 
 // webpack自动设置环境变量，development，production
 if (process.env.NODE_ENV == 'production') {
