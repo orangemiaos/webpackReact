@@ -1,4 +1,15 @@
 {
+    "plugins": [
+        // 配置 antd-mobile 按需引入 
+        [
+            "import",
+            {
+                "libraryName": "antd-mobile",
+                "style": "css"
+            }
+        ]
+    ],
+    // 配置解析jsx
     "presets": [
         "@babel/react",
         "@babel/env"

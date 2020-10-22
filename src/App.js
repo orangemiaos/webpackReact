@@ -1,135 +1,55 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation
-} from "react-router-dom";
 
-// This example has 3 pages: a public page, a protected
-// page, and a login screen. In order to see the protected
-// page, you must first login. Pretty standard stuff.
-//
-// First, visit the public page. Then, visit the protected
-// page. You're not yet logged in, so you are redirected
-// to the login page. After you login, you are redirected
-// back to the protected page.
-//
-// Notice the URL change each time. If you click the back
-// button at this point, would you expect to go back to the
-// login page? No! You're already logged in. Try it out,
-// and you'll see you go back to the page you visited
-// just *before* logging in, the public page.
+// Switch 限制只能匹配一个Route路由
+// 把 path：/ 放到最后，否则匹配不到
+import { Switch, Route, Link } from 'react-router-dom';
 
-export default function AuthExample() {
-    return (
-        <Router>
-            <div>
-                <AuthButton />
+// 引入antd-mobile
+import { Button } from 'antd-mobile';
 
-                <ul>
-                    <li>
-                        <Link to="/public">Public Page</Link>
-                    </li>
-                    <li>
-                        <Link to="/protected">Protected Page</Link>
-                    </li>
-                </ul>
+import routes from '../public/routes'
 
-                <Switch>
-                    <Route path="/public">
-                        <PublicPage />
-                    </Route>
-                    <Route path="/login">
-                        <LoginPage />
-                    </Route>
-                    <PrivateRoute path="/protected">
-                        <ProtectedPage />
-                    </PrivateRoute>
-                </Switch>
-            </div>
-        </Router>
-    );
-}
+import Page1 from './components/Page1';
+import Page2 from './components/Page2';
+import Page3 from './components/Page3';
+import Default from './components/Default';
 
-const fakeAuth = {
-    isAuthenticated: false,
-    authenticate(cb) {
-        fakeAuth.isAuthenticated = true;
-        setTimeout(cb, 100); // fake async
-    },
-    signout(cb) {
-        fakeAuth.isAuthenticated = false;
-        setTimeout(cb, 100);
-    }
-};
 
-function AuthButton() {
-    let history = useHistory();
-    console.log('history', history);
-    console.log('fakeAuth',fakeAuth);
-    return fakeAuth.isAuthenticated ? (
-        <p>
-            Welcome!{" "}
-            <button
-                onClick={() => {
-                    fakeAuth.signout(() => history.push("/"));
-                }}
-            >
-                Sign out
-      </button>
-        </p>
-    ) : (
-            <p>You are not logged in.</p>
-        );
-}
 
-// A wrapper for <Route> that redirects to the login
-// screen if you're not yet authenticated.
-function PrivateRoute({ children, ...rest }) {
-    return (
-        <Route
-            {...rest}
-            render={({ location }) =>
-                fakeAuth.isAuthenticated ? (children) : (
-                    <Redirect
-                        to={{
-                            pathname: "/login",
-                            state: { from: location }
-                        }}
-                    />
-                )
-            }
-        />
-    );
-}
-
-function PublicPage() {
-    return <h3>Public</h3>;
-}
-
-function ProtectedPage() {
-    return <h3>Protected</h3>;
-}
-
-function LoginPage() {
-    let history = useHistory();
-    let location = useLocation();
-
-    let { from } = location.state || { from: { pathname: "/" } };
-    let login = () => {
-        fakeAuth.authenticate(() => {
-            history.replace(from);
-        });
-    };
-
+export default function App() {
     return (
         <div>
-            <p>You must log in to view the page at {from.pathname}</p>
-            <button onClick={login}>Log in</button>
+            <ul>
+                <li>
+                    <Button type="primary" inline size="small" >page1</Button>
+                </li>
+                <li>
+                    <Link to='/page2'>page2</Link>
+                </li>
+                <li>
+                    <Link to='/page3'>page3</Link>
+                </li>
+                <li>
+                    <Link to='/Default'>Default</Link>
+                </li>
+            </ul>
+            <Switch>
+                {/* {routes.map(item => {
+                <Route path='/page1' ></Route>
+            })} */}
+                <Route path='/page1'>
+                    <Page1 />
+                </Route>
+                <Route path='/page2'>
+                    <Page2 />
+                </Route>
+                <Route path='/page3'>
+                    <Page3 />
+                </Route>
+                <Route path='/'>
+                    <Default />
+                </Route>
+            </Switch>
         </div>
-    );
+    )
 }
