@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 
 // Switch 限制只能匹配一个Route路由
 // 把 path：/ 放到最后，否则匹配不到
-import { Switch, Route, useHistory, useLocation, useParams } from 'react-router-dom';
+// hooks
+import { Switch, Route, useHistory, useLocation, useParams, useRouteMatch } from 'react-router-dom';
 
 // 引入antd-mobile
 import { Button } from 'antd-mobile';
 
-import routes from '../public/routes'
+import routes from './routers/routes'
 
 export default function App() {
 
@@ -29,6 +30,8 @@ export default function App() {
     // routeChange()
 
     function BlogPost() {
+        let match = useRouteMatch("/:slug");
+        console.log('match', match);
         // useParams返回path的参数
         let { name } = useParams();
         let com = routes.find(item => {

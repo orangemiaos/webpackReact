@@ -4,7 +4,7 @@ import { HashRouter } from 'react-router-dom';
 import App from './App';
 
 // 需要配置loader才可以导入css后缀名的文件
-import '../public/index.less';
+import './styles/index.less';
 
 
 // webpack自动设置环境变量，development，production

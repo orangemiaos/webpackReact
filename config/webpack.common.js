@@ -51,7 +51,7 @@ module.exports = {
         new HTMLWebpackPlugin({
             title: 'webpack title', // 页面标题
             filename: 'index.html', // 生成页面的名字
-            template: 'public/index.html' // 结合public/index.html 生成模版
+            template: 'src/index.html' // 结合public/index.html 生成模版
         })
     ],
     optimization: {
