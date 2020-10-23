@@ -1,13 +1,27 @@
-import Page1 from '../components/Page1';
-import Page2 from '../components/Page2';
-import Page3 from '../components/Page3';
-import Default from '../components/Default';
+import { lazy } from 'react';
 
 const routes = [
-    { path: '/page1', component: Page1, name: 'path1' },
-    { path: '/page2', component: Page2, name: 'path2' },
-    { path: '/page3', component: Page3, name: 'path3' },
-    { path: '/', component: Default, name: 'default', exact: true },
+    {
+        path: '/page1',
+        name: 'path1',
+        component: lazy(() => import('../components/Page1'))
+    },
+    {
+        path: '/page2',
+        name: 'path2',
+        component: lazy(() => import('../components/Page2'))
+    },
+    {
+        path: '/page3',
+        name: 'path3',
+        component: lazy(() => import('../components/Page3'))
+    },
+    {
+        path: '/',
+        name: '首页',
+        exact: true,
+        component: lazy(() => import('../components/Default'))
+    }
 ]
 
 
