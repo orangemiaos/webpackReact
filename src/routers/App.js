@@ -8,19 +8,28 @@ import routes from './routes'
 
 
 const App = () => (
-    <Suspense fallback={<h1>加载中...</h1>}>
-        <Router>
-            <Switch>
-                {routes.map((route, index) => (
+    <Router>
+        <Switch>
+            {routes.map((route, index) => {
+                if (route.redirect) {
+                    return (<div>redirect</div>);
+                }
+                return (
                     <Route
                         key={route.path || index}
                         path={route.path}
-                        render={() => (<route.component />)}
+                        render={() => {
+                            return (
+                                <Suspense fallback={<h1>加载中...</h1>}>
+                                    <route.component route={route}>{route.children}</route.component>
+                                </Suspense>
+                            )
+                        }}
                     />
-                ))}
-            </Switch>
-        </Router>
-    </Suspense>
+                )
+            })}
+        </Switch>
+    </Router>
 )
 
 export default App;
