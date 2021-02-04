@@ -32,18 +32,8 @@ module.exports = {
       { test: /\.(png|svg|jpg|gif)$/, use: ["file-loader"] },
       // 处理字体
       { test: /\.(woff|woff2|eot|ttf|otf)$/, use: ["file-loader"] },
-      // 识别jsx
-      // use: {
-      //   loader: "babel-loader",
-      //   options: {
-      //     // 按需引入
-      //     // @babel/preset-env 解析 es 678
-      //     // @babel/preset-react 识别jsx
-      //     // presets: ["@babel/preset-react"],
-      //     // presets: ["@babel/preset-env", "@babel/preset-react"],
-      //     // plugins: ["@babel/plugin-syntax-class-properties"],
-      //   },
-      // },
+      // Babel 是一个工具链，主要用于将 ECMAScript 2015+ 版本的代码转换为向后兼容的 JavaScript 语法，以便能够运行在当前和旧版本的浏览器或其他环境中。
+      // babel-loader @babel/core 共同存在
       {
         test: /\.js|jsx$/,
         use: ["babel-loader"],

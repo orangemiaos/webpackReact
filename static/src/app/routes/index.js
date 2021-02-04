@@ -6,6 +6,7 @@ class Index extends Component {
   clickCopy = () => {
     console.log(111);
   };
+
   render() {
     return <div onClick={this.clickCopy}>app</div>;
   }
