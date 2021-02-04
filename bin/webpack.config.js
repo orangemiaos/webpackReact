@@ -32,17 +32,21 @@ module.exports = {
       { test: /\.(png|svg|jpg|gif)$/, use: ["file-loader"] },
       // 处理字体
       { test: /\.(woff|woff2|eot|ttf|otf)$/, use: ["file-loader"] },
-      // 处理xml
-      { test: /\.xml$/, use: ["xml-loader"] },
       // 识别jsx
+      // use: {
+      //   loader: "babel-loader",
+      //   options: {
+      //     // 按需引入
+      //     // @babel/preset-env 解析 es 678
+      //     // @babel/preset-react 识别jsx
+      //     // presets: ["@babel/preset-react"],
+      //     // presets: ["@babel/preset-env", "@babel/preset-react"],
+      //     // plugins: ["@babel/plugin-syntax-class-properties"],
+      //   },
+      // },
       {
         test: /\.js|jsx$/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-          },
-        },
+        use: ["babel-loader"],
         exclude: /node_modules/,
       },
     ],
