@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 
-class Photos extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    return <div>我是photo</div>;
+    return <div>我是login</div>;
   }
 }
+
+export default Login;
