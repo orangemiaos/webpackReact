@@ -34,6 +34,8 @@ module.exports = {
       { test: /\.(woff|woff2|eot|ttf|otf)$/, use: ["file-loader"] },
       // Babel 是一个工具链，主要用于将 ECMAScript 2015+ 版本的代码转换为向后兼容的 JavaScript 语法，以便能够运行在当前和旧版本的浏览器或其他环境中。
       // babel-loader @babel/core 共同存在
+      // @babel/preset-react 识别jsx 语法
+      // @babel/plugin-proposal-class-properties 识别箭头函数
       {
         test: /\.js|jsx$/,
         use: ["babel-loader"],
