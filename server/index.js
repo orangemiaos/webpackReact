@@ -1,20 +1,27 @@
-let Koa = require("koa");
-let app = new Koa();
-let path = require("path");
+/* koa 框架 */
+const Koa = require("koa");
+const app = new Koa();
+/* koa-router */
+const Router = require("@koa/router");
+const router = new Router();
+/* 中间件引入 */
+const views = require("koa-views");
+const bodyParser = require("koa-bodyparser");
+// 不可以let let static = require("koa-static");
+// static 是内部变量
+const koaStatic = require("koa-static");
 
-let Router = require("@koa/router");
-let router = new Router();
-let views = require("koa-views");
-let bodyParser = require("koa-bodyparser");
-let static = require("koa-static");
-let port = 4000;
+/* 定义常量 */
+const port = 4000;
+
+/* 文件引用 */
+const path = require("path");
+import renderTemp from "./middlewares/renderTemp";
 
 // 定义渲染页面的根目录
 app.use(
   views(path.resolve(__dirname, "./"), {
-    map: {
-      html: "ejs",
-    },
+    map: { html: "ejs" },
   })
 );
 
@@ -24,7 +31,7 @@ app.use(bodyParser());
 // 如果没有koa-static，html里直接写相对地址，路由匹配不到css，js文件
 // 配置koa-static后页面加载的文件，静态文件都从css文件里找
 // __dirname 返回server 文件夹的地址
-app.use(static(path.resolve(__dirname, "./css")));
+app.use(koaStatic(path.resolve(__dirname, "./css")));
 
 // 应用级中间件，无论放在哪都优先于路由级中间件
 app.use(async (ctx, next) => {
@@ -37,46 +44,7 @@ app.use(async (ctx, next) => {
 });
 
 // 路由级中间件
-router
-  .get("/", async (ctx, next) => {
-    ctx.cookies.set("__user_cookie", encodeURIComponent("张萌"), {
-      // 时长为1分钟
-      maxAge: 1 * 60 * 1000,
-      // path: "/shop",
-      // true:仅服务端可以访问，false客户端也可访问（服务端：node，客户端：浏览器document.cookie 无法获取）
-      httpOnly: false,
-    });
-    // render渲染的是 koa-views 定义根目录下的页面
-    // index 省略html
-    await ctx.render("index");
-  })
-  .get("/shop", (ctx, next) => {
-    ctx.body = ctx.cookies.get("__user_cookie");
-    // next();
-  })
-  .get("/news", (ctx, next) => {
-    ctx.body = ctx.cookies.get("__user_cookie");
-    // next();
-  })
-  .get("/name", (ctx, next) => {
-    ctx.body = "Hello World!";
-  })
-  .get("/test", (ctx, next) => {
-    ctx.body = "test";
-  })
-  .post("/add", (ctx, next) => {
-    ctx.body = ctx.request.body;
-    // ...
-  })
-  .put("/users/:id", (ctx, next) => {
-    // ...
-  })
-  .del("/users/:id", (ctx, next) => {
-    // ...
-  })
-  .all("/users/:id", (ctx, next) => {
-    // ...
-  });
+renderTemp(app, router);
 
 app.use(router.routes()).use(router.allowedMethods());
 app.listen(port, () => {
