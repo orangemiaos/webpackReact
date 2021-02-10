@@ -9,4 +9,8 @@ class GlobleStore {
   }
 }
 
+autorun(() => {
+  console.log("Tasks left: " + todos.unfinishedTodoCount)
+})
+
 export default new GlobleStore();

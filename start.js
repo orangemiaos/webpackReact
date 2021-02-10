@@ -2,4 +2,4 @@
 require("@babel/register");
 require("@babel/polyfill");
 
-const app = require("./server/index.js");
+const app = require("./app.js");

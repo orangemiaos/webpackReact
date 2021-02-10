@@ -7,18 +7,20 @@ import Login from "../views/login";
 // @observer 的识别，需要 decorators-legacy 的插件
 // @observer
 class Index extends Component {
+  
   constructor(props) {
     super(props);
   }
+
   clickCopy = () => {
-    console.log(111);
+    console.log('点击');
   };
 
   render() {
     return (
       <div>
-        <Link to="/login">Home</Link>
-        <span></span>
+        <span onClick={this.clickCopy}>点击</span>
+        <Link to="/login">Home222</Link>
         <Switch>
           <Route exact path="/login">
             <Login />

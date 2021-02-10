@@ -1,6 +1,7 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const assetsDir = path.resolve(__dirname, "../dist");
 
 module.exports = {
   mode: "development",
@@ -11,8 +12,15 @@ module.exports = {
   output: {
     // 输出文件名
     filename: "index.js",
-    // 输出路径
-    path: path.resolve(__dirname, "../dist"),
+    // 项目打包所存放到的路径
+    path: assetsDir,
+    /*
+    publicPath: '/assets/', // 相对于服务(server-relative)
+    publicPath: 'assets/', // 相对于 HTML 页面
+    publicPath: '../assets/', // 相对于 HTML 页面
+    */
+    // 假设你将这个工程部署在服务器 http://server/，通过将output.publicPath设置为/assets/，这个工程将会在http://server/assets/找到webpack资源
+    publicPath: "/",
   },
   // 打包源代码的时候，追踪代码位置，从打包文件追踪到源文件中
   devtool: "inline-source-map",
